@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SintaPlus - Smart Education System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --emerald-primary: #10b981;
+    --emerald-dark: #059669;
+    --emerald-light: #34d399;
+    --emerald-glow: rgba(16, 185, 129, 0.6);
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-light: #e2e8f0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: var(--text-light);
+}
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(16,185,129,0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(16,185,129,0.1), transparent 40%);
+    z-index: -1;
+}
+
+/* Header */
+header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 8%; background:rgba(15,23,42,0.7); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--glass-border); position:sticky; top:0; z-index:1000;
+}
+header h1 { font-weight:700; }
+.logo-white { color:#fff; }
+.logo-emerald { color: var(--emerald-primary); text-shadow:0 0 12px var(--emerald-glow); }
+nav a { margin-left:25px; text-decoration:none; color:var(--text-light); transition:0.3s; }
+nav a:hover, nav a.active { color:var(--emerald-primary); text-shadow:0 0 10px var(--emerald-glow); }
+
+/* Section Global */
+section { padding:100px 8%; scroll-margin-top:120px; }
+
+/* Hero */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 90vh;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.hero-left {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.hero-right {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero h2 { font-size:48px; margin-bottom:20px; background:linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero p { max-width:500px; margin-bottom:25px; color:#cbd5e1; }
+
+/* =================== Frame HP =================== */
+.phone-frame {
+    width: 260px;
+    max-width: 90%;
+    aspect-ratio: 9/19.5; /* Rasio umum smartphone */
+    border: 12px solid #0f172a; /* Warna bezel */
+    border-radius: 40px;
+    padding: 10px;
+    background: #020617; /* Dalam bezel */
+    box-shadow: 0 0 30px var(--emerald-glow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.phone-frame::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 6px;
+    background: #333;
+    border-radius: 3px; /* speaker notch */
+}
+
+.phone-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px; /* layar membulat */
+    object-fit: cover;
+}
+
+/* =================== PHONE SCREEN UI =================== */
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #f5f8fd, #e7e8ed);
+    border-radius: 25px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow background subtle */
+.phone-screen::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(16,185,129,0.25), transparent 70%);
+    top: -50px;
+    right: -50px;
+    z-index: 0;
+}
+
+/* Header App */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.app-header h4 {
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.profile-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 10px rgba(16,185,129,0.6);
+}
+
+/* Welcome Card */
+.welcome-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 15px;
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.welcome-card small {
+    color: #94a3b8;
+    font-size: 10px;
+}
+
+.welcome-card h3 {
+    font-size: 24px;
+    margin: 5px 0;
+    color: #10b981;
+}
+
+.welcome-card p {
+    font-size: 11px;
+    color: #cbd5e1;
+}
+
+/* Menu */
+.menu-title {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 5px;
+    z-index: 1;
+}
+
+.app-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    z-index: 1;
+}
+
+.menu-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.menu-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(16,185,129,0.5);
+}
+
+.menu-box span {
+    font-size: 10px;
+    color: #cbd5e1;
+}
+
+/* Schedule */
+.schedule-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1;
+}
+
+.schedule-item {
+    table-layout: fixed;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #333;
+}
+
+.schedule-item strong {
+    color: #10b981;
+}
+
+
+/* Button */
+.btn {
+    padding:12px 30px; border-radius:50px; background:linear-gradient(135deg,var(--emerald-primary),var(--emerald-dark));
+    color:white; text-decoration:none; font-weight:600; box-shadow:0 0 20px var(--emerald-glow); transition:0.4s;
+}
+.btn:hover { transform:translateY(-3px); box-shadow:0 0 30px var(--emerald-glow); }
+
+/* Card */
+.card { padding:30px; border-radius:20px; background:var(--card-bg); backdrop-filter:blur(20px); border:1px solid var(--glass-border); transition:0.4s; }
+.card:hover { transform:translateY(-10px); box-shadow:0 0 25px var(--emerald-glow); }
+
+/* Flex */
+.flex { display:flex; gap:40px; margin-top:40px; flex-wrap:wrap; }
+
+/* Info Carousel */
+.info-carousel {
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-radius: 15px;
+    background: rgba(16,185,129,0.1);
+    backdrop-filter: blur(10px);
+    border:1px solid var(--glass-border);
+    overflow:hidden;
+    height:50px;
+    position: relative;
+}
+.info-slide {
+    position:absolute;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:500;
+    color:#e2e8f0;
+    opacity:0;
+    transition: opacity 0.6s;
+}
+.info-slide.active { opacity:1; }
+
+/* Team */
+.team-grid { display:flex; gap:30px; margin-top:40px; flex-wrap:wrap; justify-content:center; }
+.team-card { flex:1 1 200px; max-width:220px; text-align:center; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:20px; padding:20px; backdrop-filter:blur(15px); transition:0.4s; }
+.team-card:hover { transform:translateY(-10px); box-shadow:0 0 25px var(--emerald-glow); }
+.team-card img { width:120px; height:120px; border-radius:50%; margin-bottom:15px; object-fit:cover; box-shadow:0 0 15px var(--emerald-glow); }
+.team-card h3 { margin-bottom:5px; font-size:18px; }
+.team-card p { font-size:14px; color:#94a3b8; }
+
+/* Testimoni Angka */
+.testimonial-numbers {
+    position: relative;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    height: 150px;
+}
+.testimonial-card {
+    width: 220px;
+    height: 120px;
+    background: rgba(16,185,129,0.1);
+    backdrop-filter: blur(15px);
+    border:1px solid var(--glass-border);
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 0 20px rgba(16,185,129,0.4);
+    color:#e2e8f0;
+    position:relative;
+    font-weight:600;
+    font-size:18px;
+    overflow:hidden;
+}
+.testimonial-card h2 { font-size:36px; margin-bottom:5px; color:#10b981; }
+.float-left { animation: floatLeft 4s ease-in-out infinite alternate; }
+.float-right { animation: floatRight 4s ease-in-out infinite alternate; }
+@keyframes floatLeft {
+    0% { transform: translateX(-50px) scale(0.9); opacity:0; }
+    50% { transform: translateX(10px) scale(1.05); opacity:1; }
+    100% { transform: translateX(0px) scale(1); opacity:1; }
+}
+@keyframes floatRight {
+    0% { transform: translateX(50px) scale(0.9); opacity:0; }
+    50% { transform: translateX(-10px) scale(1.05); opacity:1; }
+    100% { transform: translateX(0px) scale(1); opacity:1; }
+}
+
+/* Footer */
+footer { text-align:center; padding:40px; border-top:1px solid var(--glass-border); color:#94a3b8; }
+
+/* Responsive */
+@media(max-width:900px){ 
+    .hero, .flex, .team-grid, .testimonial-numbers{ flex-direction:column; text-align:center; } 
+    .hero img, .phone-frame{ margin-top:40px; width:100%; } 
+    .testimonial-numbers{ gap:20px; height:auto; } 
+}
+
+/* ================= BENEFIT NEW STYLE ================= */
+
+.benefit-wrapper {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    position: relative;
+}
+
+.benefit-item {
+    background: linear-gradient(145deg, rgba(16,185,129,0.08), rgba(255,255,255,0.03));
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    padding: 40px 25px;
+    text-align: center;
+    transition: 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-item::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(16,185,129,0.3), transparent 60%);
+    top: -50%;
+    left: -50%;
+    transform: scale(0);
+    transition: 0.6s;
+}
+
+.benefit-item:hover::before {
+    transform: scale(1);
+}
+
+.benefit-item:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 0 40px var(--emerald-glow);
+}
+
+.benefit-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    animation: floatIcon 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatIcon {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-8px); }
+}
+
+.benefit-item h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: var(--emerald-primary);
+}
+
+.benefit-item p {
+    font-size: 14px;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+/* ================= FITUR STYLE UPGRADE ================= */
+
+.fitur-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.fitur-box {
+    background: linear-gradient(145deg, rgba(16,185,129,0.08), rgba(255,255,255,0.03));
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 30px;
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.fitur-box::before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(16,185,129,0.25), transparent 70%);
+    top: -40%;
+    left: -40%;
+    transform: scale(0);
+    transition: 0.6s;
+}
+
+.fitur-box:hover::before {
+    transform: scale(1);
+}
+
+.fitur-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 35px var(--emerald-glow);
+}
+
+.fitur-box h3 {
+    margin-bottom: 15px;
+    color: var(--emerald-primary);
+    font-size: 18px;
+}
+
+.fitur-box p {
+    font-size: 14px;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+/* ================= PRICING PREMIUM ================= */
+
+.pricing-title {
+    text-align: center;
+    font-size: 40px;
+    background: linear-gradient(90deg,#10b981,#34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pricing-sub {
+    text-align: center;
+    margin-bottom: 70px;
+    color: #cbd5e1;
+}
+
+.pricing-wrapper {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.price-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    width: 320px;
+    text-align: center;
+    transition: 0.4s;
+    position: relative;
+}
+
+.price-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 0 40px var(--emerald-glow);
+}
+
+.price-card h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--emerald-primary);
+}
+
+.price-old {
+    text-decoration: line-through;
+    color: #94a3b8;
+    display: block;
+    font-size: 14px;
+}
+
+.price-new {
+    font-size: 32px;
+    font-weight: 700;
+    color: #10b981;
+    display: block;
+}
+
+.price-note {
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+.price-card ul {
+    list-style: none;
+    margin: 30px 0;
+    text-align: left;
+    color: #e2e8f0;
+}
+
+.price-card ul li {
+    margin-bottom: 10px;
+}
+
+.featured {
+    transform: scale(1.07);
+    border: 2px solid #10b981;
+    box-shadow: 0 0 50px var(--emerald-glow);
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: linear-gradient(135deg,#10b981,#059669);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+/* ================= LIFETIME PACKAGE ================= */
+
+.lifetime-section {
+    margin-top: 120px;
+    padding: 60px 0;
+    border-top: 1px solid var(--glass-border);
+}
+
+.lifetime-title {
+    text-align: center;
+    font-size: 30px;
+    color: #facc15; /* gold accent */
+    margin-bottom: 15px;
+}
+
+.lifetime-desc {
+    text-align: center;
+    color: #cbd5e1;
+    margin-bottom: 60px;
+}
+
+.lifetime-wrapper {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.lifetime-card {
+    width: 320px;
+    background: linear-gradient(145deg, rgba(250,204,21,0.08), rgba(255,255,255,0.03));
+    border: 1px solid rgba(250,204,21,0.3);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.lifetime-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 0 40px rgba(250,204,21,0.6);
+}
+
+.lifetime-card h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #facc15;
+}
+
+.lifetime-price {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.lifetime-card ul {
+    list-style: none;
+    text-align: left;
+    color: #e2e8f0;
+}
+
+.lifetime-card ul li {
+    margin-bottom: 10px;
+}
+
+/* AFTER SERVICE */
+.after-service {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.after-service h3 {
+    margin-bottom: 40px;
+    font-size: 28px;
+    color: var(--emerald-primary);
+}
+
+.after-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+}
+
+.after-grid div {
+    background: rgba(16,185,129,0.1);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1><span class="logo-white">Sinta</span><span class="logo-emerald">Plus</span></h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#benefit">Benefit</a>
+        <a href="#fitur">Fitur</a>
+        <a href="#pricelist">Pricelist</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+</header>
+
+<!-- ================= HOME ================= -->
+<section class="hero" id="home">
+    <div class="hero-left">
+        <h2>Digital Future of Education</h2>
+        <p>SintaPlus hadir sebagai solusi IT pendidikan berbasis teknologi modern untuk mendigitalisasi sistem akademik secara cerdas dan terintegrasi.</p>
+
+
+        <!-- Testimoni Angka -->
+        <div class="testimonial-numbers">
+            <div class="testimonial-card float-left">
+                <h2 id="schools-count">0</h2>
+                <p>Lembaga Pendidikan dan Masyarakat</p>
+            </div>
+            <div class="testimonial-card float-right">
+                <h2 id="students-count">0</h2>
+                <p>Siswa dan Tenaga Pendidikan</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-right">
+        <!-- Frame HP -->
+        <div class="phone-frame">
+    <div class="phone-screen">
+
+        <div class="app-header">
+            <h4>SIAPLUSNU</h4>
+            <div class="profile-circle">A</div>
+        </div>
+
+        <div class="welcome-card">
+            <small>Waktu Saat Ini</small>
+            <h3>10:21</h3>
+            <p>Selamat Datang</p>
+        </div>
+
+        <div class="menu-title">Menu Utama</div>
+        <div class="app-menu">
+            <div class="menu-box">📘<span>E-Jurnal</span></div>
+            <div class="menu-box">📄<span>Izin</span></div>
+            <div class="menu-box">📝<span>PSBM</span></div>
+            <div class="menu-box">📊<span>Portofolio</span></div>
+        </div>
+
+        <div class="menu-title">Jadwal Hari Ini</div>
+        <div class="schedule-box">
+            <div class="schedule-item">
+                <strong>07:15</strong>
+                <span>Olahraga</span>
+            </div>
+            <div class="schedule-item">
+                <strong>08:45</strong>
+                <span>Matematika</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</section>
+
+<!-- ================= ABOUT + TEAM ================= -->
+<section id="about">
+    <h2>Tentang SintaPlus</h2>
+    <p style="margin-top:20px; max-width:800px;">
+        SintaPlus didirikan pada tahun 2026 sebagai platform Smart Education System yang membantu transformasi digital sekolah melalui sistem berbasis AI dan cloud.
+    </p>
+
+    <div class="flex">
+        <div class="card">
+            <h3>Visi</h3>
+            <p>Menjadi platform pendidikan digital terdepan di Indonesia.</p>
+        </div>
+        <div class="card">
+            <h3>Misi</h3>
+            <p>Mengembangkan sistem akademik modern yang efisien dan terintegrasi.</p>
+        </div>
+    </div>
+
+    <h3 style="margin-top:50px;">Tim Kami</h3>
+    <div class="team-grid">
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+            <h3>John Doe</h3>
+            <p>CEO & Founder</p>
+        </div>
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Smith">
+            <h3>Jane Smith</h3>
+            <p>CTO</p>
+        </div>
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Mike Johnson">
+            <h3>Mike Johnson</h3>
+            <p>Lead Developer</p>
+        </div>
+        <div class="team-card">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emily Davis">
+            <h3>Emily Davis</h3>
+            <p>UI/UX Designer</p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= BENEFIT ================= -->
+<!-- ================= BENEFIT ================= -->
+<section id="benefit">
+    <h2 style="text-align:center;">Why Choose SintaPlus?</h2>
+
+    <div class="benefit-wrapper">
+        
+        <div class="benefit-item">
+            <div class="benefit-icon">🚀</div>
+            <h3>Transformasi Digital Total</h3>
+            <p>
+                SintaPlus membantu sekolah beralih dari sistem manual 
+                menjadi sistem digital terintegrasi yang modern dan efisien.
+            </p>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">🤖</div>
+            <h3>AI Smart Analytics</h3>
+            <p>
+                Analisis performa siswa dan manajemen sekolah 
+                berbasis Artificial Intelligence untuk keputusan yang lebih akurat.
+            </p>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">☁️</div>
+            <h3>Cloud Access 24/7</h3>
+            <p>
+                Sistem berbasis cloud memungkinkan akses data 
+                kapan saja dan di mana saja dengan keamanan tinggi.
+            </p>
+        </div>
+
+        <div class="benefit-item">
+            <div class="benefit-icon">📈</div>
+            <h3>Efisiensi & Produktivitas</h3>
+            <p>
+                Mengurangi beban administrasi hingga 60% 
+                dan meningkatkan efisiensi operasional sekolah.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= FITUR ================= -->
+<!-- ================= FITUR ================= -->
+<section id="fitur">
+    <h2 style="text-align:center;">Fitur Unggulan SintaPlus</h2>
+
+    <p style="max-width:800px; margin:20px auto 50px; text-align:center; color:#cbd5e1;">
+        <strong>SINTAPLUS</strong> dirancang agar mudah digunakan oleh semua kalangan, 
+        termasuk guru senior, tanpa perlu keahlian teknis khusus. 
+        Sistem intuitif, sederhana, namun sangat powerful untuk kebutuhan sekolah modern.
+    </p>
+
+    <div class="fitur-grid">
+
+        <div class="fitur-box">
+            <h3>📲 Presensi Digital</h3>
+            <p><strong>Absensi online cepat & otomatis tersimpan.</strong> 
+            Data langsung masuk sistem tanpa kertas dan tanpa rekap manual.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>📊 Rekapitulasi Otomatis</h3>
+            <p><strong>Semua data langsung direkap instan.</strong> 
+            Tidak perlu menghitung manual, laporan siap kapan saja.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>🗂 Database Siswa & Guru</h3>
+            <p><strong>Data tersimpan rapi dalam satu sistem aman.</strong> 
+            Mudah dicari, tidak tercecer, dan terstruktur.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>👨‍🏫 Monitoring Real-Time Kepala Sekolah</h3>
+            <p><strong>Pantau aktivitas sekolah setiap hari secara langsung.</strong> 
+            Kehadiran guru, proses belajar, hingga kondisi sekolah dapat dipantau real-time.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>📒 Rekap Harian Guru Piket</h3>
+            <p><strong>Pencatatan aktivitas harian digital.</strong> 
+            Tanpa buku tulis, semua tercatat otomatis dan tersimpan rapi.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>💰 Manajemen Keuangan TU</h3>
+            <p><strong>Tagihan, transaksi, dan tabungan siswa otomatis.</strong> 
+            Administrasi keuangan lebih transparan dan efisien.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>🖥 Ujian Online (CBT)</h3>
+            <p><strong>Ujian berbasis komputer, hemat kertas.</strong> 
+            Nilai langsung keluar secara otomatis tanpa koreksi manual.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>👨‍👩‍👧 Pantauan Orang Tua</h3>
+            <p><strong>Orang tua bisa memantau kehadiran & nilai secara langsung.</strong> 
+            Transparansi penuh antara sekolah dan keluarga.</p>
+        </div>
+
+        <div class="fitur-box">
+            <h3>🏫 Plotting Kelas Otomatis</h3>
+            <p><strong>Pembagian kelas cepat dan sistematis.</strong> 
+            Tanpa proses manual yang rumit dan memakan waktu.</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= PRICELIST ================= -->
+<!-- ================= PRICELIST PREMIUM ================= -->
+<section id="pricelist" class="pricing-section">
+    <h2 class="pricing-title">Paket Investasi SintaPlus</h2>
+    <p class="pricing-sub">
+        Solusi lengkap digitalisasi sekolah dengan dukungan after service profesional.
+    </p>
+
+    <div class="pricing-wrapper">
+
+        <!-- BASIC -->
+        <div class="price-card">
+            <h3>Basic</h3>
+            <div class="price">
+                <span class="price-old">Rp 7.000.000 / tahun</span>
+                <span class="price-new">Rp 5.500.000</span>
+                <span class="price-note">Harga Mitra / Tahun</span>
+            </div>
+
+            <ul>
+                <li>✔ Admin</li>
+                <li>✔ Guru</li>
+                <li>✔ Guru Piket</li>
+            </ul>
+
+            <a href="#contact" class="btn">Pilih Paket</a>
+        </div>
+
+        <!-- PRO -->
+        <div class="price-card featured">
+            <div class="badge">🔥 Best Value</div>
+            <h3>Pro</h3>
+            <div class="price">
+                <span class="price-old">Rp 12.000.000 / tahun</span>
+                <span class="price-new">Rp 7.700.000</span>
+                <span class="price-note">Harga Mitra / Tahun</span>
+            </div>
+
+            <ul>
+                <li>✔ Admin</li>
+                <li>✔ Guru & Guru Piket</li>
+                <li>✔ Kepala Sekolah</li>
+                <li>✔ Tata Usaha</li>
+                <li>✔ Siswa</li>
+                <li>✔ Orang Tua</li>
+                <li>✔ PPDB</li>
+            </ul>
+
+            <a href="#contact" class="btn">Pilih Paket</a>
+        </div>
+
+        <!-- ULTIMATE -->
+        <div class="price-card">
+            <h3>Ultimate</h3>
+            <div class="price">
+                <span class="price-old">Rp 15.000.000 / tahun</span>
+                <span class="price-new">Rp 12.200.000</span>
+                <span class="price-note">Harga Mitra / Tahun</span>
+            </div>
+
+            <ul>
+                <li>✔ Semua fitur Paket Pro</li>
+                <li>✔ Wali Kelas</li>
+                <li>✔ Kesiswaan</li>
+                <li>✔ Ujian CBT Nasional</li>
+                <li>✔ CBT Online Sekolah</li>
+            </ul>
+
+            <a href="#contact" class="btn">Pilih Paket</a>
+        </div>
+
+    </div>
+
+    <!-- ================= PAKET LEPAS ================= -->
+<div class="lifetime-section">
+
+    <h3 class="lifetime-title">Lisensi Permanen (Paket Lepas)</h3>
+    <p class="lifetime-desc">
+        Pembelian satu kali dengan <strong>hak milik penuh sistem</strong>. 
+        Tidak termasuk after service dan support tahunan.
+    </p>
+
+    <div class="lifetime-wrapper">
+
+        <!-- BASIC -->
+        <div class="lifetime-card">
+            <h4>Basic Lifetime</h4>
+            <div class="lifetime-price">Rp 39.500.000</div>
+            <ul>
+                <li>✔ Fitur Paket Basic</li>
+                <li>✔ Hak Milik Sepenuhnya</li>
+                <li>✖ Tanpa After Service</li>
+                <li>✖ Tanpa Support Tahunan</li>
+            </ul>
+        </div>
+
+        <!-- PRO -->
+        <div class="lifetime-card">
+            <h4>Pro Lifetime</h4>
+            <div class="lifetime-price">Rp 49.700.000</div>
+            <ul>
+                <li>✔ Fitur Paket Pro</li>
+                <li>✔ Hak Milik Sepenuhnya</li>
+                <li>✖ Tanpa After Service</li>
+                <li>✖ Tanpa Support Tahunan</li>
+            </ul>
+        </div>
+
+        <!-- ULTIMATE -->
+        <div class="lifetime-card">
+            <h4>Ultimate Lifetime</h4>
+            <div class="lifetime-price">Rp 78.600.000</div>
+            <ul>
+                <li>✔ Fitur Paket Ultimate</li>
+                <li>✔ Hak Milik Sepenuhnya</li>
+                <li>✖ Tanpa After Service</li>
+                <li>✖ Tanpa Support Tahunan</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- AFTER SERVICE -->
+    <div class="after-service">
+        <h3>After Service & Support</h3>
+        <div class="after-grid">
+            <div>🛠 Setup & Instalasi Sistem</div>
+            <div>📚 Training Guru & Admin</div>
+            <div>📞 Support Teknis 1 Tahun</div>
+            <div>☁ Maintenance & Update Sistem</div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p style="margin-top:20px;">Email: info@sintaplus.id</p>
+</section>
+
+<footer>
+    © 2026 SintaPlus - Smart Education Platform
+</footer>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+// Active nav
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) current = section.getAttribute("id");
+    });
+    navLinks.forEach(a => { a.classList.remove("active"); if(a.getAttribute("href")==="#"+current) a.classList.add("active"); });
+});
+
+// Info carousel
+const slides = document.querySelectorAll(".info-slide");
+let currentSlide=0;
+slides[currentSlide].classList.add("active");
+setInterval(()=>{
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add("active");
+},4000);
+
+// Animasi angka
+function animateValue(id, start, end, duration) {
+    let obj = document.getElementById(id);
+    let range = end - start;
+    let current = start;
+    let increment = end > start ? 1 : -1;
+    let stepTime = Math.abs(Math.floor(duration / range));
+    let timer = setInterval(() => {
+        current += increment;
+        obj.textContent = current.toLocaleString();
+        if (current == end) clearInterval(timer);
+    }, stepTime);
+}
+
+</script>
+
+</body>
+</html>
+
